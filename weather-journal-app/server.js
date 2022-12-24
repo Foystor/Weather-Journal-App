@@ -29,6 +29,8 @@ app.listen(port, () => {
     console.log(`Server running on localhost:${port}`);
 });
 
+
+/* Routes */
 // GET route
 app.get('/all', (req, res) => {
     res.send(projectData);
@@ -39,8 +41,10 @@ app.post('/addWeather', (req, res) => {
     const data = req.body;
 
     projectData = {
-        temp: data.temperature,
+        temp: data.temp,
         date: data.date,
-        userRes: data.userResponse
+        feeling: data.feeling
     };
+
+    console.log(projectData);
 });

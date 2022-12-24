@@ -28,3 +28,19 @@ const port = 3000;
 app.listen(port, () => {
     console.log(`Server running on localhost:${port}`);
 });
+
+// GET route
+app.get('/all', (req, res) => {
+    res.send(projectData);
+});
+
+// POST route
+app.post('/addWeather', (req, res) => {
+    const data = req.body;
+
+    projectData = {
+        temp: data.temperature,
+        date: data.date,
+        userRes: data.userResponse
+    };
+});

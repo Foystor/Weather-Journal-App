@@ -41,7 +41,7 @@ const getWeather = async (baseUrl, zipCode, key) => {
     }
 };
 
-// POST request to add the API data, as well as data entered by the user, to the app
+// POST request to add the API data, as well as data entered by the user, to Project Data
 const postData = async (url = '', data = {}) => {
     const res = await fetch(url, {
         method: 'POST',
@@ -61,7 +61,7 @@ const postData = async (url = '', data = {}) => {
     }
 };
 
-// Retrieve data from the app and updates the UI dynamically
+// GET Project Data and updates the UI dynamically
 const updateUI = async () => {
     const res = await fetch(`${serverUrl}/all`);
 

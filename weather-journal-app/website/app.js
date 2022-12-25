@@ -70,7 +70,7 @@ const updateUI = async () => {
         console.log('Data for UI update', data);
         // update UI
         document.querySelector('#date').innerHTML = `Date: ${data.date}`;
-        document.querySelector('#temp').innerHTML = `Temperature: ${Math.round(data.temp)} K`;
+        document.querySelector('#temp').innerHTML = `Temperature: ${Math.round(data.temp)} °F`;
         document.querySelector('#content').innerHTML = `Feelings: ${data.feel}`;
     } catch(error) {
         console.log('error', error);

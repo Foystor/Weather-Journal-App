@@ -4,15 +4,14 @@ const apiBaseUrl = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 // Personal API Key for OpenWeatherMap API
 const apiKey = '&appid=028f1a9d317578516fd3770eef8e37e7&units=imperial';
 
-// Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = `${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()}`;
-
 
 /* Events */
-document.querySelector('#generate').addEventListener('click', () => {
+function generateEntry() {
     const code = document.querySelector('#zip').value;
     const feel = document.querySelector('#feelings').value;
+    // create a new date instance dynamically
+    const d = new Date();
+    const newDate = `${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()}`;
 
     getWeather(apiBaseUrl, code, apiKey)
     .then(data => {
@@ -23,7 +22,9 @@ document.querySelector('#generate').addEventListener('click', () => {
         })
         .then(() => updateUI());
     });
-});
+}
+
+document.querySelector('#generate').addEventListener('click', generateEntry);
 
 
 /* Requests */

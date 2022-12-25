@@ -69,9 +69,9 @@ const updateUI = async () => {
         const data = await res.json();
         console.log('Data for UI update', data);
         // update UI
-        document.querySelector('#date').textContent = `Date: ${data.date}`;
-        document.querySelector('#temp').textContent = `Temperature: ${Math.round(data.temp)} K`;
-        document.querySelector('#content').textContent = `Feelings: ${data.feel}`;
+        document.querySelector('#date').innerHTML = `Date: ${data.date}`;
+        document.querySelector('#temp').innerHTML = `Temperature: ${Math.round(data.temp)} K`;
+        document.querySelector('#content').innerHTML = `Feelings: ${data.feel}`;
     } catch(error) {
         console.log('error', error);
     }

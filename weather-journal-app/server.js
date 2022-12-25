@@ -43,8 +43,8 @@ app.post('/addWeather', (req, res) => {
     projectData = {
         temp: data.temp,
         date: data.date,
-        feeling: data.feeling
+        feel: data.feel
     };
 
-    console.log(projectData);
+    res.send(projectData);
 });

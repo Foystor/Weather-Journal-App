@@ -6,20 +6,22 @@ const apiKey = '&appid=028f1a9d317578516fd3770eef8e37e7&units=imperial';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = `${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()}`;
 
 
 /* Events */
-// Get zipcode
 document.querySelector('#generate').addEventListener('click', () => {
     const code = document.querySelector('#zip').value;
-    const feeling = document.querySelector('#feelings').value;
+    const feel = document.querySelector('#feelings').value;
 
     getWeather(apiBaseUrl, code, apiKey)
-    .then(function(data) {
-        const temp = data.main.temp;
-
-        postData(`${serverUrl}/addWeather`, {temp: temp, date: newDate, feeling: feeling});
+    .then(data => {
+        postData(`${serverUrl}/addWeather`, {
+            temp: data.main.temp,
+            date: newDate,
+            feel: feel
+        })
+        .then(() => updateUI());
     });
 });
 
@@ -31,7 +33,7 @@ const getWeather = async (baseUrl, zipCode, key) => {
 
     try {
         const data = await res.json();
-        console.log(data);
+        console.log('Data from OpenWeatherMap', data);
         return data;
     } catch(error) {
         console.log('error', error);
@@ -51,7 +53,24 @@ const postData = async (url = '', data = {}) => {
 
     try {
         const newData = await res.json();
+        console.log('projectData after POST', data);
         return newData;
+    } catch(error) {
+        console.log('error', error);
+    }
+};
+
+// Retrieve data from the app and updates the UI dynamically
+const updateUI = async () => {
+    const res = await fetch(`${serverUrl}/all`);
+
+    try {
+        const data = await res.json();
+        console.log('Data for UI update', data);
+        // update UI
+        document.querySelector('#date').textContent = `Date: ${data.date}`;
+        document.querySelector('#temp').textContent = `Temperature: ${Math.round(data.temp)} K`;
+        document.querySelector('#content').textContent = `Feelings: ${data.feel}`;
     } catch(error) {
         console.log('error', error);
     }

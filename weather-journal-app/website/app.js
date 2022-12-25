@@ -1,27 +1,26 @@
 /* Global Variables */
-const serverUrl = 'http://localhost:3000';
-const apiBaseUrl = 'https://api.openweathermap.org/data/2.5/weather?zip=';
+const baseUrl = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 // Personal API Key for OpenWeatherMap API
 const apiKey = '&appid=028f1a9d317578516fd3770eef8e37e7&units=imperial';
 
 
 /* Events */
 function generateEntry() {
-    const code = document.querySelector('#zip').value;
+    const zipCode = document.querySelector('#zip').value;
     const feel = document.querySelector('#feelings').value;
     // create a new date instance dynamically
     const d = new Date();
     const newDate = `${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()}`;
 
-    getWeather(apiBaseUrl, code, apiKey)
+    getWeather(baseUrl, zipCode, apiKey)
     .then(data => {
-        postData(`${serverUrl}/addWeather`, {
+        postData('/addWeather', {
             temp: data.main.temp,
             date: newDate,
             feel: feel
-        })
-        .then(() => updateUI());
-    });
+        });
+    })
+    .then(() => updateUI());
 }
 
 document.querySelector('#generate').addEventListener('click', generateEntry);
@@ -29,8 +28,8 @@ document.querySelector('#generate').addEventListener('click', generateEntry);
 
 /* Requests */
 // GET request to the OpenWeatherMap API
-const getWeather = async (baseUrl, zipCode, key) => {
-    const res = await fetch(baseUrl + zipCode + key);
+const getWeather = async (url, code, key) => {
+    const res = await fetch(url + code + key);
 
     try {
         const data = await res.json();
@@ -63,7 +62,7 @@ const postData = async (url = '', data = {}) => {
 
 // GET Project Data and updates the UI dynamically
 const updateUI = async () => {
-    const res = await fetch(`${serverUrl}/all`);
+    const res = await fetch('/all');
 
     try {
         const data = await res.json();

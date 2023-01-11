@@ -53,7 +53,7 @@ const postData = async (url = '', data = {}) => {
 
     try {
         const newData = await res.json();
-        console.log('projectData after POST', data);
+        console.log('projectData after POST', newData);
         return newData;
     } catch(error) {
         console.log('error', error);

@@ -75,7 +75,6 @@ button{
     border: none;
     box-shadow: 2px 4px 5px #444;
     cursor: pointer;
-    vertical-align: bottom;
 }
 h1{
     font-size: 36px;
@@ -86,6 +85,7 @@ textarea{
     color: #f0d43a;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
+    vertical-align: bottom;
 }
 /* Reset style for HTML element on active to have no border*/
 input:focus,
